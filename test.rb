@@ -11,4 +11,6 @@ def test(command, expected)
   assert_equal expected, %x{#{command}}.chomp
 end
 
-test "echo \"SELECT 1\" | ./nakanosql", "SELECT 1"
+test "echo \"SELECT 1\" | ./nakanosql", "1"
+test "echo \"SELECT 42\" | ./nakanosql", "42"
+test "echo \"SELECT 1 2 3\" | ./nakanosql", "1 2 3"

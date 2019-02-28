@@ -15,5 +15,11 @@ func main() {
 		log.Fatalf("Gone: %s", err)
 	}
 	text = strings.TrimRight(text, "\n")
-	fmt.Println(text)
+	tokens := strings.Split(text, " ")
+	command := tokens[0]
+	if command == "SELECT" {
+		fmt.Println(strings.Join(tokens[1:], " "))
+	} else {
+		log.Fatalf("Unknown command: %s", command)
+	}
 }
