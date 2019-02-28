@@ -5,7 +5,7 @@ test: nakanosql
 	ruby test.rb
 
 clean:
-	git clean -df
+	rm -rf nakanosql
 
 all: test clean
 
