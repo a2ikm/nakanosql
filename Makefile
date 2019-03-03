@@ -5,7 +5,7 @@ test: nakanosql
 	ruby test.rb
 
 clean:
-	rm -rf nakanosql
+	rm -rf nakanosql *.db
 
 all: test clean
 
