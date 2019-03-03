@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"strings"
@@ -19,7 +20,21 @@ func main() {
 	command := tokens[0]
 	switch command {
 	case "SELECT":
-		fmt.Println(strings.Join(tokens[1:], " "))
+		f, err := os.OpenFile("data.db", os.O_RDONLY, 0644)
+		if err != nil {
+			log.Fatalf("Can't open data.db: %s", err)
+		}
+		reader := bufio.NewReader(f)
+		for {
+			line, err := reader.ReadString('\n')
+			if err != nil {
+				if err == io.EOF {
+					break
+				}
+				log.Fatalf("Can't read data.db: %s", err)
+			}
+			fmt.Printf(line)
+		}
 	case "INSERT":
 		f, err := os.OpenFile("data.db", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
