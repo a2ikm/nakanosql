@@ -1,4 +1,4 @@
-nakanosql:
+nakanosql: main.go
 	go build
 
 test: nakanosql
